@@ -1,0 +1,13 @@
+---
+
+
+- name: install releated packages
+  yum: name={{ item }} state=present
+  with_items:
+    - qemu-kvm
+    - libvirt
+    # a cli tool to install vm, similar to virt-manager, but virt-manager has UI.
+    - virt-install
+  become: true
+
+

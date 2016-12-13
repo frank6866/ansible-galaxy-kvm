@@ -1,0 +1,12 @@
+---
+# tasks file for forwarding
+
+- name: install kvm on CentOS
+  include: centos.yml
+  when: ansible_os_family == "RedHat" or ansible_os_family == "CentOS"
+
+- name: install kvm on Ubuntu
+  include: ubuntu.yml
+  when: ansible_os_family == "Debian"
+
+
