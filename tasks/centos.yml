@@ -1,13 +1,24 @@
 ---
 
+# install kvm vt envirtonment on CentOS7
+
+- name: stop and disable firewalld
+  service: name=firewalld state=stopped enabled=no
+
+# 1. fail if not support vtx or vsm
+# grep -E '(vmx|svm)' /proc/cpuinfo
 
 - name: install releated packages
   yum: name={{ item }} state=present
   with_items:
     - qemu-kvm
     - libvirt
-    # a cli tool to install vm, similar to virt-manager, but virt-manager has UI.
-    - virt-install
-  become: true
+    - virt-install # a cli tool to install vm, similar to virt-manager, but virt-manager has UI.
+    - spice-protocol
+
+- name: start and enable services
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - libvirtd
 
 

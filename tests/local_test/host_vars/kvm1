@@ -1,0 +1,8 @@
+---
+
+# linux_bridge
+linux_bridge_bridge_name: br0
+linux_bridge_device_name: eno33554960
+
+
+

@@ -1,10 +1,7 @@
 ---
 
-# tasks file for install pip on ubuntu
+# tasks file for install kvm on ubuntu
 
-- name: "install python-pip"
-  apt: name=python-pip state=present
-  become: true
 
 
 
