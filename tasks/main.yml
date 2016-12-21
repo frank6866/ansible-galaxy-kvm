@@ -1,6 +1,15 @@
 ---
 # tasks file for forwarding
 
+- name: check if cpu support virtualization
+  shell: grep -E '(vmx|svm)' /proc/cpuinfo
+  register: cpu_support_vt
+  ignore_errors: true
+
+- name: fail if cpu do not support virtualization
+  fail: msg="cpu do not support virtualization, stop installing"
+  when: cpu_support_vt | failed
+
 - name: install kvm on CentOS
   include: centos.yml
   when: ansible_os_family == "RedHat" or ansible_os_family == "CentOS"
