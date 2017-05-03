@@ -1,6 +1,10 @@
 ---
 # tasks file for forwarding
 
+- name: "fail if Operating System is not CentOS-7.x"
+  fail: msg="Operating System {{ ansible_distribution }}-{{ ansible_distribution_version }} not supported"
+  when: (ansible_distribution != "CentOS" and ansible_distribution != "RedHat") or ansible_distribution_major_version != "7"
+
 - name: check if cpu support virtualization
   shell: grep -E '(vmx|svm)' /proc/cpuinfo
   register: cpu_support_vt
@@ -12,10 +16,5 @@
 
 - name: install kvm on CentOS
   include: centos.yml
-  when: ansible_os_family == "RedHat" or ansible_os_family == "CentOS"
-
-- name: install kvm on Ubuntu
-  include: ubuntu.yml
-  when: ansible_os_family == "Debian"
 
 

@@ -1,7 +1,0 @@
----
-
-- hosts: kvm
-  remote_user: root
-  roles:
-    - frank6866.linux_bridge
-    - ../../..
